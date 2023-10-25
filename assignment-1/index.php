@@ -417,52 +417,52 @@
           </div>
         </aside>
         <div id="contacts" class="scrollto clearfix">
-        <div class="row clearfix">
-          <div class="section-heading">
-            <h3>Contact</h3>
-            <h2 class="section-title">
-              You can contact below people for our services
-            </h2>
+          <div class="row clearfix">
+            <div class="section-heading">
+              <h3>Contact</h3>
+              <h2 class="section-title">
+                You can contact below people for our services
+              </h2>
+            </div>
+              <?php
+                // Specify the path to your contacts file
+                $contactsFile = 'files/contacts.txt';
+
+                // Initialize an empty array to store contact information
+                $contacts = [];
+
+                // Check if the file exists
+                  if (file_exists($contactsFile)) {
+                      // Read the file and split it into an array of lines
+                      $lines = file($contactsFile, FILE_IGNORE_NEW_LINES);
+
+                      // Process each line and store contact information in an array
+                      foreach ($lines as $line) {
+                          // Split each line into fields using the comma and space delimiter
+                          $fields = explode(', ', $line);
+
+                          // Store contact information in an associative array
+                          $contacts[] = [
+                              'Name' => $fields[0],
+                              'Email' => $fields[1],
+                              'Phone' => $fields[2],
+                          ];
+                        }
+                  } else {
+                      echo 'Contacts file not found.';
+                  }
+                ?>
+
+                <?php foreach ($contacts as $contact) { ?>
+                  <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/img-5.jpeg" alt="User" />
+                    <footer>
+                      <?php echo $contact['Name']; ?> : <?php echo $contact['Email']; ?>
+                    </footer>
+                  </blockquote>
+                <?php } ?>
           </div>
-            <?php
-              // Specify the path to your contacts file
-              $contactsFile = 'files/contacts.txt';
-
-              // Initialize an empty array to store contact information
-              $contacts = [];
-
-              // Check if the file exists
-                if (file_exists($contactsFile)) {
-                    // Read the file and split it into an array of lines
-                    $lines = file($contactsFile, FILE_IGNORE_NEW_LINES);
-
-                    // Process each line and store contact information in an array
-                    foreach ($lines as $line) {
-                        // Split each line into fields using the comma and space delimiter
-                        $fields = explode(', ', $line);
-
-                        // Store contact information in an associative array
-                        $contacts[] = [
-                            'Name' => $fields[0],
-                            'Email' => $fields[1],
-                            'Phone' => $fields[2],
-                        ];
-                      }
-                } else {
-                    echo 'Contacts file not found.';
-                }
-              ?>
-
-              <?php foreach ($contacts as $contact) { ?>
-                <blockquote class="col-3 testimonial classic">
-                  <img src="images/user-images/img-5.jpeg" alt="User" />
-                  <footer>
-                    <?php echo $contact['Name']; ?> : <?php echo $contact['Email']; ?>
-                  </footer>
-                </blockquote>
-              <?php } ?>
         </div>
-              </div>
         <!--End of Testimonials-->
       </main>
       <!--End Main Content Area-->
