@@ -1,7 +1,16 @@
-<?php ?>
+<?php
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    header("location: login.php");
+    exit;
+}
+?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>RNR Elektronics WORLD | ONLINE ELECTRONICS SHOPPING STORE</title>
@@ -13,6 +22,7 @@
 </head>
 
 <body background="./images/iStock-1185170041.jpg" background-repeat="no-repeat" background-size="cover">
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -20,28 +30,30 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class=""><a href="aboutus.php">About Us</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="products.php">All Products</a></li>
+                        <li><a href="mostvistedproducts.php">Most Visited Products</a></li>
+                        <li><a href="recentlyvisitedproducts.php">Last Visited Products</a></li>
+                    </ul>
+                </li>
                 <li class=""><a href="news.php">News</a></li>
                 <li class=""><a href="contacts.php">Our Contacts</a></li>
-                <li class="active"><a href="users.php">Users</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
             </ul>
         </div>
     </nav>
-    
-    
-    <br /><br />
-    <section class="main-section alabaster" id="users">
-        <div class="container fullsize" style="background-color:whitesmoke ">
-            <br />
-            <br />
-            <center>
-                <a class="link animated fadeInUp delay-2s servicelink" href="register.php">ADD USER</a>&nbsp;&nbsp;&nbsp;
-                <a class="link animated fadeInDown delay-1s servicelink" href="searchuser.php">SEARCH USER</a>&nbsp;&nbsp;&nbsp;
-            </center>
-        </div>
-    </section>
+
+    <div class="container" style="margin-top:60px;float:right">
+        <h1 class="my-5">Hi, <b style="text-transform:capitalize"><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to RNR Elektronics WORLD.</h1>
+
+    </div>
+
+
 </body>
 
 </html>

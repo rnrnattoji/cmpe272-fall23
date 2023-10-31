@@ -12,7 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
-<body background="./images/iStock-1185170041.jpg" background-repeat="no-repeat" background-size="cover">
+<body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -20,9 +20,15 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class=""><a href="aboutus.php">About Us</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="products.php">All Products</a></li>
+                    </ul>
+                </li>
                 <li class=""><a href="news.php">News</a></li>
                 <li class="active"><a href="contacts.php">Our Contacts</a></li>
-                <li class=""><a href="users.php">Users</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
