@@ -6,13 +6,15 @@ require_once "config.php";
 $username = $password = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
 
-$email = $phone = $address = "";
-$email_err = $phone_err = $address_err = "";
+$firstname = $lastname = "";
+$firstname_err = $lastname_err = "";
+
+$email = $phone = $phonehome = $address = "";
+$email_err = $phone_err = $phonehome_err = $address_err = "";
 
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     // Validate username
     if (empty(trim($_POST["username"]))) {
         $username_err = "Please enter a username.";
@@ -46,6 +48,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Close statement
             mysqli_stmt_close($stmt);
         }
+    }
+    
+    // Validate First Name
+    if (empty(trim($_POST["firstname"]))) {
+        $firstname_err = "Please enter First Name.";
+    } else {
+        $firstname = trim($_POST["firstname"]);
+    }
+
+    // Validate Last Name
+    if (empty(trim($_POST["lastname"]))) {
+        $lastname_err = "Please enter Last Name.";
+    } else {
+        $lastname = trim($_POST["lastname"]);
     }
 
     // Validate password
@@ -83,13 +99,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $address = trim($_POST["address"]);
         $param_address = trim($_POST["address"]);
     }
-
+    
     // Validate phone
     if (empty(trim($_POST["phone"]))) {
         $phone_err = "Please enter phone number.";
+    } elseif (strlen((string)$_POST["phone"]) != 10) {
+        $phone_err = "Phone number should have exactly 10 integers.";
     } else {
         $phone = trim($_POST["phone"]);
         $param_phone = trim($_POST["phone"]);
+    }
+    
+    // Validate Home phone
+    if (empty(trim($_POST["phonehome"]))) {
+        $phonehome_err = "Please enter Home Phone number.";
+    } elseif (strlen((string)$_POST["phonehome"]) != 10) {
+        $phonehome_err = "Home Phone number should have exactly 10 integers.";
+    } else {
+        $phonehome = trim($_POST["phonehome"]);
+        $param_phonehome = trim($_POST["phonehome"]);
     }
 
 
@@ -98,21 +126,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check input errors before inserting in database
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err)
-    && empty($email_err) && empty($phone_err) && empty($address_err)) {
+    && empty($lastname_err) && empty($firstname_err) && empty($email_err) && empty($phone_err)  && empty($phonehome_err) && empty($address_err)) {
 
         // Prepare an insert statement
-        $sql = "INSERT INTO users (name, password, email, contact, address) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (name, firstname, lastname, password, email, contact, homecontact, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_email, $param_phone, $param_address);
+            mysqli_stmt_bind_param($stmt, "ssssssss", $param_username, $param_firstname, $param_lastname, $param_password, $param_email, $param_phone, $param_phonehome, $param_address);
 
             // Set parameters
             $param_username = $username;
+            $param_firstname = $firstname;
+            $param_lastname = $lastname;
             $param_password = md5($password); //password_hash($password, PASSWORD_DEFAULT); // Creates a password hash   
 
             $param_email  = $email;
             $param_phone  = $phone;
+            $param_phonehome  = $phonehome;
             $param_address  = $address;
 
             // Attempt to execute the prepared statement
@@ -146,6 +177,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         body {
             font: 14px sans-serif;
+            background-image: url('./images/signin.jpg'); /* Replace 'your-image.jpg' with the path to your image */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover; /* This ensures the image covers the entire body */
         }
 
         .wrapper {
@@ -155,11 +191,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 
-<body background="online_shopping.jpeg" background-repeat="no-repeat" background-size="cover">
+<body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="welcome.php">GreenLeaf Elektronics</a>
+                <a class="navbar-brand" href="welcome.php">RNR Elektronics WORLD</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Existing User?</a></li>
@@ -186,6 +222,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
             </div>
             <div class="form-group">
+                <label>FirstName</label>
+                <input type="text" name="firstname" class="form-control <?php echo (!empty($firstname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $firstname; ?>">
+                <span class="invalid-feedback"><?php echo $firstname_err; ?></span>
+            </div>
+            <div class="form-group">
+                <label>LastName</label>
+                <input type="text" name="lastname" class="form-control <?php echo (!empty($lastname_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $lastname; ?>">
+                <span class="invalid-feedback"><?php echo $lastname_err; ?></span>
+            </div>
+            <div class="form-group">
                 <label>Email</label>
                 <input type="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
                 <span class="invalid-feedback"><?php echo $email_err; ?></span>
@@ -194,6 +240,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label>Phone</label>
                 <input type="text" name="phone" class="form-control <?php echo (!empty($phone_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $phone; ?>">
                 <span class="invalid-feedback"><?php echo $phone_err; ?></span>
+            </div>
+            <div class="form-group">
+                <label>Home Phone</label>
+                <input type="text" name="phonehome" class="form-control <?php echo (!empty($phonehome_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $phonehome; ?>">
+                <span class="invalid-feedback"><?php echo $phonehome_err; ?></span>
             </div>
             <div class="form-group">
                 <label>Address</label>

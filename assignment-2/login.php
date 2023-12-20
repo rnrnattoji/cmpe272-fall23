@@ -4,7 +4,7 @@ session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: welcome.php");
+    header("location: users.php");
     exit;
 }
 
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $_SESSION["username"] = $username;
 
                             // Redirect user to welcome page
-                            header("location: welcome.php");
+                            header("location: users.php");
                         } else {
                             // Password is not valid, display a generic error message
                             $login_err = "Invalid username or password.......";
@@ -103,6 +103,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         body {
             font: 14px sans-serif;
+            background-image: url('./images/iStock-1185170041.jpg'); /* Replace 'your-image.jpg' with the path to your image */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover; /* This ensures the image covers the entire body */
+        
         }
 
         .wrapper {
@@ -112,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 
-<body background="./images/iStock-1185170041.jpg" background-repeat="no-repeat" background-size="cover">
+<body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">

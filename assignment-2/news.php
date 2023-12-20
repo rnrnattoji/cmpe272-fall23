@@ -131,9 +131,7 @@
                 </li>
                 <li class="active"><a href="news.php">News</a></li>
                 <li class=""><a href="contacts.php">Our Contacts</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
+                <li class="" ><a href="users.php">Users</a></li>
             </ul>
         </div>
     </nav>

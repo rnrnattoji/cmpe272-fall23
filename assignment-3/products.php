@@ -37,14 +37,12 @@
                 </li>
                 <li class=""><a href="news.php">News</a></li>
                 <li class=""><a href="contacts.php">Our Contacts</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="logout.php"><span class="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
+                <li class="" ><a href="users.php">Users</a></li>
             </ul>
         </div>
     </nav>
     <h3>Electronic Gadgets.</h3>
-    <div style="margin-top:20px">
+    <div style="margin-top:20px; text-align: center">
         <a href="recentlyvisitedproducts.php">Your last five previously visited products.</a>
     </div>
     <div class="container" style="margin-top: 60px; margin-bottom: 100px">

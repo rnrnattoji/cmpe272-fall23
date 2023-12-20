@@ -8,9 +8,24 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font: 14px sans-serif;
+            background-image: url('./images/iStock-1185170041.jpg'); /* Replace 'your-image.jpg' with the path to your image */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover; /* This ensures the image covers the entire body */
+        }
+
+        .wrapper {
+            width: 450px;
+            padding: 20px;
+        }
+    </style>
 </head>
 
-<body background="./images/iStock-1185170041.jpg" background-repeat="no-repeat" background-size="cover">
+<body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">

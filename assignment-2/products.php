@@ -34,6 +34,7 @@
                 </li>
                 <li class=""><a href="news.php">News</a></li>
                 <li class=""><a href="contacts.php">Our Contacts</a></li>
+                <li class="" ><a href="users.php">Users</a></li>
             </ul>
         </div>
     </nav>
